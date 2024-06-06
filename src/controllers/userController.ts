@@ -79,3 +79,18 @@ export const updateUser = async (req: Request, res: Response) => {
     res.status(500).send({ message: 'Error updating user' });
   }
 };
+
+export const allUsers = async (req: Request, res: Response) => {
+  try {
+    const users = await AppDataSource.manager.find(User);
+
+    if (!users || users.length === 0) {
+      return res.status(404).send({ message: 'No users found' });
+    }
+
+    res.status(200).send(users);
+  } catch (error) {
+    console.error(error);
+    res.status(500).send({ message: 'Error finding users' });
+  }
+};
