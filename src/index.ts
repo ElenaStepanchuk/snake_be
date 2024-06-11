@@ -19,6 +19,9 @@ const AppDataSource = new DataSource({
   entities: [User],
   synchronize: true,
   logging: false,
+  ssl: {
+    rejectUnauthorized: false,
+  },
 });
 
 AppDataSource.initialize()
